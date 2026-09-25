@@ -7,6 +7,7 @@ first once the last one ends. The list lives in `includes/data.php`:
 'hero_videos' => [
     'assets/video/hero-1.mp4',
     'assets/video/hero-2.mp4',
+    'assets/video/hero-3.mp4',
 ],
 ```
 

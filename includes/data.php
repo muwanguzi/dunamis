@@ -18,6 +18,7 @@ $SITE = [
     'hero_videos' => [
         'assets/video/hero-1.mp4',
         'assets/video/hero-2.mp4',
+        'assets/video/hero-3.mp4',
     ],
     'hero_poster' => 'assets/img/work/reclaim-health.jpg',
     'socials'   => [
