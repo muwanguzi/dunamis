@@ -1,7 +1,6 @@
 <section class="hero" id="top">
   <div class="hero-media" aria-hidden="true">
     <video class="hero-video" id="heroVideo" autoplay muted playsinline preload="metadata"
-           poster="<?= e($SITE['hero_poster']) ?>"
            src="<?= e($SITE['hero_videos'][0]) ?>"
            data-playlist='<?= e(json_encode($SITE['hero_videos'], JSON_UNESCAPED_SLASHES)) ?>'>
     </video>
