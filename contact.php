@@ -3,7 +3,7 @@
  * Contact form handler.
  * - Accepts POST from the homepage form (AJAX or classic).
  * - Validates, blocks spam via honeypot + basic rate sense.
- * - Tries mail(); always appends to storage/messages.log as a fallback.
+ * - Emails the enquiry via mail() and always appends to storage/messages.log as a backup.
  * Responds with JSON when requested with fetch(), otherwise redirects back.
  */
 
@@ -12,6 +12,8 @@ declare(strict_types=1);
 require __DIR__ . '/includes/data.php';
 
 const RECIPIENT = 'dunamismediacompanylimited@gmail.com';
+// Sender must be on the site's own domain so SPF/DKIM line up and inboxes trust it.
+const SENDER    = 'no-reply@dunamismedia.ug';
 
 $wantsJson = (
     stripos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false
@@ -71,14 +73,18 @@ if (!is_dir($dir)) { @mkdir($dir, 0775, true); }
 @file_put_contents($dir . '/messages.log', $entry . "\n", FILE_APPEND | LOCK_EX);
 
 /* Attempt email */
-$subject = 'New enquiry — ' . $clean($name);
+$subject = '=?UTF-8?B?' . base64_encode('New enquiry — ' . $clean($name)) . '?=';
 $body    = "Name: {$clean($name)}\nEmail: {$clean($email)}\nCompany: "
          . ($company !== '' ? $clean($company) : '—')
          . "\n\nMessage:\n{$message}\n";
-$headers = "From: Dunamis Website <no-reply@" . ($_SERVER['SERVER_NAME'] ?? 'localhost') . ">\r\n"
-         . "Reply-To: {$clean($email)}\r\n"
+$headers = "From: Dunamis Website <" . SENDER . ">\r\n"
+         . "Reply-To: {$clean($name)} <{$clean($email)}>\r\n"
+         . "MIME-Version: 1.0\r\n"
          . "Content-Type: text/plain; charset=UTF-8\r\n";
 
-@mail(RECIPIENT, $subject, $body, $headers); // best-effort; log is the source of truth in dev
+$mailed = @mail(RECIPIENT, $subject, $body, $headers, '-f' . SENDER);
+if (!$mailed) {
+    @file_put_contents($dir . '/messages.log', '[' . date('c') . "] ^ mail() failed for the entry above\n\n", FILE_APPEND | LOCK_EX);
+}
 
 respond(true, 'Thanks, ' . $clean($name) . ' — your message is in. We\'ll reply within one working day.');
