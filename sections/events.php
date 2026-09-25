@@ -12,9 +12,14 @@
       <ul class="event-list">
         <?php foreach ($EVENTS as $ev): ?>
           <li class="event-row reveal">
-            <div class="event-date">
-              <span class="event-day"><?= e($ev['day']) ?></span>
-              <span class="event-month"><?= e($ev['month']) ?></span>
+            <div class="event-media">
+              <?php if (!empty($ev['img'])): ?>
+                <img src="<?= e($ev['img']) ?>" alt="" loading="lazy" width="640" height="480">
+              <?php endif; ?>
+              <div class="event-date">
+                <span class="event-day"><?= e($ev['day']) ?></span>
+                <span class="event-month"><?= e($ev['month']) ?></span>
+              </div>
             </div>
             <div class="event-body">
               <?php if (!empty($ev['tag'])): ?><span class="event-tag"><?= e($ev['tag']) ?></span><?php endif; ?>
@@ -26,7 +31,7 @@
             </div>
             <?php if (!empty($ev['link'])): ?>
               <a class="event-link" href="<?= e($ev['link']) ?>">
-                <?= e($ev['link_label'] ?? 'Learn more') ?> <span aria-hidden="true">→</span>
+                <?= e($ev['link_label'] ?? 'Learn more') ?> <span aria-hidden="true">↗</span>
               </a>
             <?php endif; ?>
           </li>

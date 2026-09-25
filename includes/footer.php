@@ -1,42 +1,48 @@
 <footer class="site-footer">
   <div class="wrap">
-    <div class="footer-top">
-      <a href="#top" class="footer-wordmark"><?= e($SITE['name']) ?></a>
-      <p class="footer-tag"><?= e($SITE['tagline']) ?></p>
-    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="footer-logo" aria-label="<?= e($SITE['name']) ?> — back to top">
+          <img src="<?= e($SITE['logo']) ?>" alt="" width="56" height="56">
+          <span><?= e($SITE['name']) ?></span>
+        </a>
+        <p class="footer-tag"><?= e($SITE['tagline']) ?></p>
+        <a class="btn btn-sm footer-cta" href="#contact">Start a project <span aria-hidden="true">↗</span></a>
+      </div>
 
-    <div class="footer-cols">
-      <div class="footer-col">
-        <h4>Navigate</h4>
+      <nav class="footer-col" aria-label="Footer">
+        <h4>Explore</h4>
         <ul>
           <?php foreach ($NAV as $item): ?>
             <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
           <?php endforeach; ?>
         </ul>
-      </div>
+      </nav>
+
       <div class="footer-col">
         <h4>Follow</h4>
         <ul>
           <?php foreach ($SITE['socials'] as $s): ?>
-            <li><a href="<?= e($s['url']) ?>" target="_blank" rel="noopener"><?= e($s['label']) ?> <?= e($s['handle']) ?></a></li>
+            <li><a href="<?= e($s['url']) ?>" target="_blank" rel="noopener"><?= e($s['label']) ?></a></li>
           <?php endforeach; ?>
         </ul>
       </div>
-      <div class="footer-col">
-        <h4>Reach us</h4>
+
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
         <ul>
           <li><a href="mailto:<?= e($SITE['email']) ?>"><?= e($SITE['email']) ?></a></li>
           <?php foreach ($SITE['phones'] as $p): ?>
             <li><a href="tel:<?= e(preg_replace('/\s+/', '', $p)) ?>"><?= e($p) ?></a></li>
           <?php endforeach; ?>
-          <li><?= e($SITE['address']) ?></li>
+          <li class="footer-address"><?= e($SITE['address']) ?></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© <?= date('Y') ?> <?= e($SITE['legal']) ?>. All rights reserved.</p>
-      <p><a href="#top">Back to top ↑</a></p>
+      <p>© <?= date('Y') ?> <?= e($SITE['legal']) ?></p>
+      <a href="#top">Back to top ↑</a>
     </div>
   </div>
 </footer>

@@ -39,15 +39,15 @@ $NAV = [
 // falls back to a "nothing scheduled" state automatically when it's empty.
 $EVENTS = [
     ['title' => 'Brand Strategy Workshop', 'day' => '10', 'month' => 'Oct', 'year' => '2026',
-     'location' => 'Dunamis Media, Kira Road, Kampala', 'tag' => 'Workshop',
+     'location' => 'Dunamis Media, Kira Road, Kampala', 'tag' => 'Workshop', 'img' => 'assets/img/events/brand-strategy-workshop.jpg',
      'desc' => 'A hands-on half-day session on building a brand strategy that actually drives sales — for founders and marketing leads.',
      'link' => '#contact', 'link_label' => 'Reserve a seat'],
     ['title' => 'Kampala Creatives & Brands Mixer', 'day' => '14', 'month' => 'Nov', 'year' => '2026',
-     'location' => 'Kampala, Uganda', 'tag' => 'Meetup',
+     'location' => 'Kampala, Uganda', 'tag' => 'Meetup', 'img' => 'assets/img/events/creatives-mixer.jpg',
      'desc' => 'An evening of informal networking for marketers, creatives and brand owners across the city.',
      'link' => '#contact', 'link_label' => 'RSVP'],
     ['title' => 'Year-End Campaign Planning Clinic', 'day' => '05', 'month' => 'Dec', 'year' => '2026',
-     'location' => 'Dunamis Media, Kira Road, Kampala', 'tag' => 'Clinic',
+     'location' => 'Dunamis Media, Kira Road, Kampala', 'tag' => 'Clinic', 'img' => 'assets/img/events/planning-clinic.jpg',
      'desc' => 'Free 30-minute slots with our strategy team to map out your Q1 marketing calendar.',
      'link' => '#contact', 'link_label' => 'Book a slot'],
 ];
@@ -129,10 +129,10 @@ $CLIENTS = [
 $WORK = [
     ['title' => 'Nile Agro',        'kind' => 'Brand refresh · Packaging', 'tint' => 'a', 'img' => 'assets/img/photos/graphic-design.jpg'],
     ['title' => 'Reclaim Health',   'kind' => 'Campaign · Content',        'tint' => 'b', 'img' => 'assets/img/photos/marketing-strategy.jpg'],
-    ['title' => 'Lynn Driving',     'kind' => 'Identity · Digital',        'tint' => 'c', 'img' => null],
+    ['title' => 'Lynn Driving',     'kind' => 'Identity · Digital',        'tint' => 'c', 'img' => 'assets/img/work/lynn-driving.jpg'],
     ['title' => 'Eurofoam',         'kind' => 'Media buying · Activation', 'tint' => 'd', 'img' => 'assets/img/photos/emails.jpg'],
     ['title' => 'Equatorial',       'kind' => 'PR · Video production',     'tint' => 'e', 'img' => 'assets/img/services/video-production-alt.jpg'],
-    ['title' => 'Prestige Driving', 'kind' => 'Social · Performance',      'tint' => 'f', 'img' => null],
+    ['title' => 'Prestige Driving', 'kind' => 'Social · Performance',      'tint' => 'f', 'img' => 'assets/img/work/prestige-driving.jpg'],
 ];
 
 $TESTIMONIALS = [
