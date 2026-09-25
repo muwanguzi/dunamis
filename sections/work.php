@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="section-head reveal">
       <p class="section-kicker">Selected work</p>
-      <h2 class="section-title">Brands we helped<br>get seen.</h2>
+      <h2 class="section-title">Brands we helped<span class="accent-line">get seen.</span></h2>
     </header>
 
     <div class="work-grid">

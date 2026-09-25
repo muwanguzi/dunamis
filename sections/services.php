@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="section-head reveal">
       <p class="section-kicker">What we do</p>
-      <h2 class="section-title">Seven capabilities.<br>One accountable team.</h2>
+      <h2 class="section-title">Seven capabilities.<span class="accent-line">One accountable team.</span></h2>
       <p class="section-intro">
         No hand-offs between agencies. From the first insight to the final placement,
         the same people own the outcome. Browse the list — the preview follows.

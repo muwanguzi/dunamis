@@ -3,7 +3,7 @@
     <div class="studio-grid">
       <div class="studio-lead reveal">
         <p class="section-kicker">The studio</p>
-        <h2 class="section-title">A dynamic media agency with a bias for action.</h2>
+        <h2 class="section-title">A dynamic media agency<span class="accent-line">with a bias for action.</span></h2>
         <p class="section-intro">
           We exist to amplify your message, grow engagement and move real numbers —
           combining cutting-edge media solutions with craft you can feel.

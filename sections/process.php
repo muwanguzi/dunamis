@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="section-head reveal">
       <p class="section-kicker">How we work</p>
-      <h2 class="section-title">Four steps.<br>No hand-offs.</h2>
+      <h2 class="section-title">Four steps.<span class="accent-line">No hand-offs.</span></h2>
       <p class="section-intro">The same team carries a project from the first conversation to the report after launch.</p>
     </header>
 

@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="contact-intro reveal">
       <span class="contact-bar" aria-hidden="true"></span>
-      <h2 class="contact-title">Make it seen.<br>Make it matter.</h2>
+      <h2 class="contact-title">Make it seen.<span class="accent-line">Make it matter.</span></h2>
       <p class="section-intro">Tell us what you're launching — we'll come back within one working day.</p>
     </div>
 

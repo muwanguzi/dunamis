@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="section-head reveal">
       <p class="section-kicker">What's next</p>
-      <h2 class="section-title">Upcoming events.</h2>
+      <h2 class="section-title">Upcoming<span class="accent-line">events.</span></h2>
       <p class="section-intro">
         Workshops, activations and industry meet-ups — announced here as soon as the dates are locked in.
       </p>

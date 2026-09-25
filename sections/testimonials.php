@@ -2,7 +2,7 @@
   <div class="wrap">
     <header class="section-head reveal">
       <p class="section-kicker">In their words</p>
-      <h2 class="section-title">Clients don't just<br>like it — they use it.</h2>
+      <h2 class="section-title">Clients don't just like it.<span class="accent-line">They use it.</span></h2>
     </header>
 
     <ul class="quote-grid">

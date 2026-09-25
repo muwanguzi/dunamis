@@ -21,10 +21,12 @@
     </p>
 
     <div class="hero-actions reveal">
-      <a class="btn btn-lg" href="#contact">Start a project <span aria-hidden="true">→</span></a>
-      <a class="btn btn-ghost btn-lg" href="#work">See the work</a>
+      <a class="btn btn-lg" href="#contact">Start a project <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-ghost btn-lg" href="#work">See the work <span aria-hidden="true">↗</span></a>
     </div>
   </div>
+
+  <p class="hero-pill"><span aria-hidden="true">●</span> Kira Road · Kampala, Uganda</p>
 
   <button class="hero-mute" id="heroMute" type="button" aria-pressed="true" hidden>
     <span class="hero-mute-icon" aria-hidden="true">🔇</span>
