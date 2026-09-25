@@ -19,7 +19,7 @@ $SITE = [
         'assets/video/hero-1.mp4',
         'assets/video/hero-2.mp4',
     ],
-    'hero_poster' => 'assets/img/photos/marketing-strategy.jpg',
+    'hero_poster' => 'assets/img/work/reclaim-health.jpg',
     'socials'   => [
         ['label' => 'Instagram', 'handle' => '@dunamismediaofficial', 'url' => 'https://instagram.com/dunamismediaofficial'],
         ['label' => 'Twitter / X', 'handle' => '@dunamismediaco', 'url' => 'https://x.com/dunamismediaco'],
@@ -127,11 +127,11 @@ $CLIENTS = [
 ];
 
 $WORK = [
-    ['title' => 'Nile Agro',        'kind' => 'Brand refresh · Packaging', 'tint' => 'a', 'img' => 'assets/img/photos/graphic-design.jpg'],
-    ['title' => 'Reclaim Health',   'kind' => 'Campaign · Content',        'tint' => 'b', 'img' => 'assets/img/photos/marketing-strategy.jpg'],
+    ['title' => 'Nile Agro',        'kind' => 'Brand refresh · Packaging', 'tint' => 'a', 'img' => 'assets/img/work/nile-agro.jpg'],
+    ['title' => 'Reclaim Health',   'kind' => 'Campaign · Content',        'tint' => 'b', 'img' => 'assets/img/work/reclaim-health.jpg'],
     ['title' => 'Lynn Driving',     'kind' => 'Identity · Digital',        'tint' => 'c', 'img' => 'assets/img/work/lynn-driving.jpg'],
-    ['title' => 'Eurofoam',         'kind' => 'Media buying · Activation', 'tint' => 'd', 'img' => 'assets/img/photos/emails.jpg'],
-    ['title' => 'Equatorial',       'kind' => 'PR · Video production',     'tint' => 'e', 'img' => 'assets/img/services/video-production-alt.jpg'],
+    ['title' => 'Eurofoam',         'kind' => 'Media buying · Activation', 'tint' => 'd', 'img' => 'assets/img/work/eurofoam.jpg'],
+    ['title' => 'Equatorial',       'kind' => 'PR · Video production',     'tint' => 'e', 'img' => 'assets/img/work/equatorial.jpg'],
     ['title' => 'Prestige Driving', 'kind' => 'Social · Performance',      'tint' => 'f', 'img' => 'assets/img/work/prestige-driving.jpg'],
 ];
 
