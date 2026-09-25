@@ -14,8 +14,8 @@ Add or remove clips by editing that array — drop the file in this folder and
 add its path to the list (any length works, one clip is fine too).
 
 - Format: H.264 / AAC MP4, ~1080p, keep each clip a few MB so it loads fast
-- The `<video>` is `autoplay muted playsinline`; the round button bottom-right
-  unmutes it and the mute state carries over between clips
+- The `<video>` starts `autoplay muted playsinline` (browsers block sound until a click); the "Sound on" pill bottom-right
+  unmutes it (natural speed, audio on) and the state carries over between clips. Muted, the picture is slowed to 0.4x
 - Until at least one file is present, the hero falls back to the poster image
   set in `includes/data.php` (`hero_poster`)
 

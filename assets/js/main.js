@@ -41,46 +41,63 @@
   /* ---- hero background video: playlist loop + sound toggle ---- */
   var heroVideo = document.getElementById("heroVideo");
   var muteBtn = document.getElementById("heroMute");
-  var HERO_PLAYBACK_RATE = 0.4; // footage plays a bit fast at native speed; slow it down
+  var HERO_SLOW_RATE = 0.4; // silent footage plays slowed down; with sound on it runs at natural speed
   if (heroVideo) {
     var playlist = [];
     try { playlist = JSON.parse(heroVideo.getAttribute("data-playlist") || "[]"); } catch (e) { playlist = []; }
     var clipIndex = 0;
+    heroVideo.volume = 0.85;
+    if ("preservesPitch" in heroVideo) heroVideo.preservesPitch = true;
 
-    var applyRate = function () { heroVideo.playbackRate = HERO_PLAYBACK_RATE; };
+    // Slow-mo makes audio sound broken, so only slow the picture while it is muted.
+    var applyRate = function () { heroVideo.playbackRate = heroVideo.muted ? HERO_SLOW_RATE : 1; };
     applyRate();
-    // playbackRate can reset on browsers once metadata (re)loads, so reassert it
+    // playbackRate can reset once metadata (re)loads, so reassert it
     heroVideo.addEventListener("loadedmetadata", applyRate);
+
+    var startPlayback = function () {
+      var p = heroVideo.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          // Browser refused sound without a fresh gesture: fall back to muted playback.
+          heroVideo.muted = true;
+          applyRate();
+          heroVideo.play().catch(function () {});
+        });
+      }
+    };
 
     if (playlist.length > 1) {
       heroVideo.addEventListener("ended", function () {
         clipIndex = (clipIndex + 1) % playlist.length;
         var wasMuted = heroVideo.muted;
         heroVideo.src = playlist[clipIndex];
-        heroVideo.muted = wasMuted; // changing src resets muted in some browsers
+        heroVideo.muted = wasMuted; // changing src can reset muted
         applyRate();
-        heroVideo.play().catch(function () {});
+        startPlayback();
       });
     }
 
     if (muteBtn) {
       var mIcon = muteBtn.querySelector(".hero-mute-icon");
+      var mLabel = muteBtn.querySelector(".hero-mute-label");
       var syncMute = function () {
-        var off = heroVideo.muted || heroVideo.paused;
-        muteBtn.setAttribute("aria-pressed", String(off));
+        var off = heroVideo.muted;
+        muteBtn.setAttribute("aria-pressed", String(!off));
+        muteBtn.setAttribute("aria-label", off ? "Turn video sound on" : "Turn video sound off");
         if (mIcon) mIcon.textContent = off ? "🔇" : "🔊";
+        if (mLabel) mLabel.textContent = off ? "Sound on" : "Sound off";
+        muteBtn.classList.toggle("is-live", !off);
       };
-      var showMute = function () {
-        if (heroVideo.readyState >= 2 && heroVideo.videoHeight > 0) muteBtn.hidden = false;
-      };
-      heroVideo.addEventListener("loadeddata", showMute);
-      heroVideo.addEventListener("canplay", showMute);
-      showMute();
       muteBtn.addEventListener("click", function () {
         heroVideo.muted = !heroVideo.muted;
-        if (!heroVideo.muted && heroVideo.paused) { heroVideo.play().catch(function () {}); }
+        applyRate();
+        if (!heroVideo.muted) { heroVideo.volume = 0.85; }
+        if (heroVideo.paused) { startPlayback(); }
         syncMute();
       });
+      heroVideo.addEventListener("volumechange", function () { applyRate(); syncMute(); });
+      muteBtn.hidden = false; // always available, don't wait for the video to load
       syncMute();
     }
   }

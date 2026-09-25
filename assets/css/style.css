@@ -200,12 +200,16 @@ button { font: inherit; cursor: pointer; }
 
 .hero-mute {
   position: absolute; z-index: 2; right: clamp(1rem, 4vw, 2.5rem); bottom: clamp(1.25rem, 4vw, 2.5rem);
-  width: 2.75rem; height: 2.75rem; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.45); background: rgba(27,36,41,.35);
-  color: #fff; display: grid; place-items: center; font-size: 1rem;
-  backdrop-filter: blur(4px); transition: background .2s var(--ease);
+  display: inline-flex; align-items: center; gap: .55rem; height: 2.75rem; padding: 0 1.1rem 0 .9rem;
+  border-radius: 100px; border: 1px solid rgba(255,255,255,.55); background: rgba(14,14,16,.5);
+  color: #fff; font-family: var(--f-display); font-weight: 700; font-size: .78rem; letter-spacing: .04em;
+  backdrop-filter: blur(6px); transition: background .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease);
 }
-.hero-mute:hover { background: rgba(27,36,41,.65); }
+.hero-mute[hidden] { display: none; }
+.hero-mute:hover { background: rgba(14,14,16,.8); border-color: var(--accent); }
+.hero-mute.is-live { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+.hero-mute-icon { font-size: 1rem; line-height: 1; }
+@media (max-width: 560px) { .hero-mute-label { display: none; } .hero-mute { padding: 0; width: 2.75rem; justify-content: center; } }
 
 .hero-explore {
   position: absolute; z-index: 2; left: 50%; transform: translateX(-50%);

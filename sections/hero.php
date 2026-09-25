@@ -27,9 +27,9 @@
 
   <p class="hero-pill"><span aria-hidden="true">●</span> Kira Road · Kampala, Uganda</p>
 
-  <button class="hero-mute" id="heroMute" type="button" aria-pressed="true" hidden>
+  <button class="hero-mute" id="heroMute" type="button" aria-pressed="false" aria-label="Turn video sound on">
     <span class="hero-mute-icon" aria-hidden="true">🔇</span>
-    <span class="sr-only">Toggle background video sound</span>
+    <span class="hero-mute-label">Sound on</span>
   </button>
 
   <a class="hero-explore" href="#services">
