@@ -1,0 +1,7 @@
+# contact-form submissions (personal data)
+storage/*.log
+
+# private business documents
+*.docx
+
+.DS_Store
