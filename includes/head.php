@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=<?= (int) @filemtime(__DIR__ . '/../assets/css/style.css') ?>">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/img/brand/favicon-192.png">
 <link rel="apple-touch-icon" href="assets/img/brand/favicon-180.png">

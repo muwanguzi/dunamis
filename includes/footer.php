@@ -41,6 +41,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js" defer></script>
+<script src="assets/js/main.js?v=<?= (int) @filemtime(__DIR__ . '/../assets/js/main.js') ?>" defer></script>
 </body>
 </html>
