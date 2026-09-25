@@ -27,7 +27,7 @@
         <?php foreach ($TEAM as $m): ?>
           <li class="team-card reveal">
             <?php if (!empty($m['photo'])): ?>
-              <img class="team-photo" src="<?= e($m['photo']) ?>" alt="<?= e($m['name']) ?>" loading="lazy" width="168" height="168">
+              <img class="team-photo" src="<?= e($m['photo']) ?>" alt="<?= e($m['name']) ?>" loading="lazy" width="232" height="232">
             <?php else: ?>
               <span class="team-avatar" aria-hidden="true"><?= e(mb_substr($m['name'], 0, 1)) ?></span>
             <?php endif; ?>

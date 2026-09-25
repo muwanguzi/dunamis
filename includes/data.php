@@ -105,9 +105,6 @@ $VALUES = [
 ];
 
 $TEAM = [
-    ['name' => 'Kyobe Godfrey', 'role' => 'Founder & Visionary Leader',
-     'photo' => 'assets/img/team/kyobe-godfrey.jpg',
-     'bio' => 'Finance, sales and media strategy background. Also founder of KYOBE Edge Limited.'],
     ['name' => 'Gift Ayebare', 'role' => 'Director – Communications',
      'photo' => 'assets/img/team/gift-ayebare.jpg',
      'bio' => '10+ years in corporate communications, PR and media relations.'],
