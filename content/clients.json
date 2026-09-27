@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Equatorial",
+        "logo": "assets/img/clients/equatorial.png"
+    },
+    {
+        "name": "Eurofoam",
+        "logo": "assets/img/clients/eurofoam.png"
+    },
+    {
+        "name": "Kaps",
+        "logo": "assets/img/clients/kaps.png"
+    },
+    {
+        "name": "Kizza",
+        "logo": "assets/img/clients/kizza.png"
+    },
+    {
+        "name": "Lynn Driving",
+        "logo": "assets/img/clients/lynn-driving.png"
+    },
+    {
+        "name": "Nile Agro",
+        "logo": "assets/img/clients/nile-agro.jpg"
+    },
+    {
+        "name": "Prestige Driving",
+        "logo": "assets/img/clients/prestige-driving.png"
+    },
+    {
+        "name": "Reclaim Health",
+        "logo": "assets/img/clients/reclaim-health.png"
+    },
+    {
+        "name": "SBA",
+        "logo": "assets/img/clients/sba.jpg"
+    },
+    {
+        "name": "Vodka",
+        "logo": "assets/img/clients/vodka.png"
+    }
+]

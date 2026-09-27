@@ -1,0 +1,51 @@
+[
+    {
+        "no": "01",
+        "title": "Brand & Commercial Printing",
+        "tint": "a",
+        "img": "assets/img/services/branding-printing.jpg",
+        "desc": "Identity systems, packaging and large-format print produced with a finish that holds up in the real world."
+    },
+    {
+        "no": "02",
+        "title": "Digital Marketing",
+        "tint": "b",
+        "img": "assets/img/services/digital-marketing.jpg",
+        "desc": "Social, SEO and paid media built around a measurable funnel – not vanity metrics."
+    },
+    {
+        "no": "03",
+        "title": "Content Creation",
+        "tint": "c",
+        "img": "assets/img/services/content-creation.jpg",
+        "desc": "Video, editorial and design assets shaped for each platform and every stage of the journey."
+    },
+    {
+        "no": "04",
+        "title": "Media Buying",
+        "tint": "d",
+        "img": "assets/img/services/media-buying.jpg",
+        "desc": "Planning and negotiating placements across broadcast, outdoor and digital for maximum reach per shilling."
+    },
+    {
+        "no": "05",
+        "title": "Experiential Marketing",
+        "tint": "a",
+        "img": "assets/img/services/experiential-marketing.jpg",
+        "desc": "Activations and events that turn an audience into participants and participants into advocates."
+    },
+    {
+        "no": "06",
+        "title": "PR & Crisis Management",
+        "tint": "d",
+        "img": "assets/img/services/pr-crisis.jpg",
+        "desc": "Reputation strategy, media relations and rapid response when the story needs steering."
+    },
+    {
+        "no": "07",
+        "title": "Video Production",
+        "tint": "e",
+        "img": "assets/img/services/video-production.jpg",
+        "desc": "Concept to final grade – commercials, documentaries and social cutdowns from one team."
+    }
+]

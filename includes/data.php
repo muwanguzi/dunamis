@@ -1,10 +1,37 @@
 <?php
 /**
  * Central content store for the Dunamis Media one-page site.
- * Edit copy here – the templates in /sections read from these arrays.
+ *
+ * The real, editable copy lives in /content/*.json — edit it from /admin,
+ * or by hand if you prefer. The arrays below are only a safety-net default:
+ * if a JSON file is ever missing or corrupt, the site quietly falls back to
+ * this last-known-good snapshot instead of breaking.
  */
 
-$SITE = [
+declare(strict_types=1);
+
+/** Escape for HTML output. */
+function e(?string $s): string { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
+
+/**
+ * Load one JSON content file, falling back to $default if it's missing,
+ * unreadable or not valid JSON.
+ */
+function load_content(string $name, $default) {
+    $path = __DIR__ . '/../content/' . $name . '.json';
+    if (is_file($path) && is_readable($path)) {
+        $raw = file_get_contents($path);
+        if ($raw !== false) {
+            $data = json_decode($raw, true);
+            if (json_last_error() === JSON_ERROR_NONE && $data !== null) {
+                return $data;
+            }
+        }
+    }
+    return $default;
+}
+
+$SITE = load_content('site', [
     'name'      => 'Dunamis Media',
     'legal'     => 'Dunamis Media Company Limited',
     'tagline'   => 'Creative thinking, crafted beautifully.',
@@ -13,32 +40,26 @@ $SITE = [
     'address'   => 'Martyrs Mall, Plot 1667, Kyaliwajjala – Namugongo, Kira Road',
     'logo'      => 'assets/img/brand/dunamis-logo.png',
     'wordmark'  => 'assets/img/brand/dunamis-wordmark.png',
-    // Hero plays through these in order, looping back to the first once the
-    // last one ends. Drop more clips in assets/video/ and add them here.
     'hero_videos' => [
         'assets/video/hero-1.mp4',
         'assets/video/hero-2.mp4',
         'assets/video/hero-3.mp4',
     ],
-    'hero_poster' => 'assets/img/work/reclaim-health.jpg',
     'socials'   => [
         ['label' => 'Instagram', 'handle' => '@dunamismediaofficial', 'url' => 'https://instagram.com/dunamismediaofficial'],
         ['label' => 'Twitter / X', 'handle' => '@dunamismediaco', 'url' => 'https://x.com/dunamismediaco'],
     ],
-];
+]);
 
-$NAV = [
+$NAV = load_content('nav', [
     ['label' => 'Work',        'href' => '#work'],
     ['label' => 'Services',    'href' => '#services'],
     ['label' => 'Studio',      'href' => '#studio'],
     ['label' => 'Events',      'href' => '#events'],
     ['label' => 'Contact',     'href' => '#contact'],
-];
+]);
 
-// Upcoming events / activations. Placeholder dates below — swap in the real
-// ones (or clear the array back to []) before this goes live; the section
-// falls back to a "nothing scheduled" state automatically when it's empty.
-$EVENTS = [
+$EVENTS = load_content('events', [
     ['title' => 'Brand Strategy Workshop', 'day' => '10', 'month' => 'Oct', 'year' => '2026',
      'location' => 'Dunamis Media, Kira Road, Kampala', 'tag' => 'Workshop', 'img' => 'assets/img/events/brand-strategy-workshop.jpg',
      'desc' => 'A hands-on half-day session on building a brand strategy that actually drives sales — for founders and marketing leads.',
@@ -51,9 +72,9 @@ $EVENTS = [
      'location' => 'Dunamis Media, Kira Road, Kampala', 'tag' => 'Clinic', 'img' => 'assets/img/events/planning-clinic.jpg',
      'desc' => 'Free 30-minute slots with our strategy team to map out your Q1 marketing calendar.',
      'link' => '#contact', 'link_label' => 'Book a slot'],
-];
+]);
 
-$PROCESS = [
+$PROCESS = load_content('process', [
     ['no' => '01', 'title' => 'Discover',
      'desc' => 'Brief, brand audit and audience research — we find the real problem before we touch a design tool.'],
     ['no' => '02', 'title' => 'Strategize',
@@ -62,18 +83,16 @@ $PROCESS = [
      'desc' => 'Design, film, copy and print produced in-house — on brand, reviewed with you at every stage.'],
     ['no' => '04', 'title' => 'Launch & Learn',
      'desc' => 'We place it, activate it, then report on what moved — and feed that back into the next round.'],
-];
+]);
 
-$STATS = [
+$STATS = load_content('stats', [
     ['value' => '8',    'suffix' => '',  'label' => 'Full-service capabilities under one roof'],
     ['value' => '30',   'suffix' => '+', 'label' => 'Brands guided across East Africa'],
     ['value' => '10',   'suffix' => '+', 'label' => 'Years of combined comms leadership'],
     ['value' => '360',  'suffix' => '°', 'label' => 'Strategy, creative and media in sync'],
-];
+]);
 
-// 'img' backs the card with a photo; where we don't have one, 'tint' picks a
-// branded gradient (a–e) instead. Both sit under a dark scrim + centred label.
-$SERVICES = [
+$SERVICES = load_content('services', [
     ['no' => '01', 'title' => 'Brand & Commercial Printing', 'tint' => 'a',
      'img' => 'assets/img/services/branding-printing.jpg',
      'desc' => 'Identity systems, packaging and large-format print produced with a finish that holds up in the real world.'],
@@ -95,26 +114,26 @@ $SERVICES = [
     ['no' => '07', 'title' => 'Video Production', 'tint' => 'e',
      'img' => 'assets/img/services/video-production.jpg',
      'desc' => 'Concept to final grade – commercials, documentaries and social cutdowns from one team.'],
-];
+]);
 
-$VALUES = [
+$VALUES = load_content('values', [
     ['label' => 'Integrity',     'score' => 95],
     ['label' => 'Creativity',    'score' => 97],
     ['label' => 'Excellence',    'score' => 90],
     ['label' => 'Collaboration', 'score' => 90],
     ['label' => 'Innovation',    'score' => 95],
-];
+]);
 
-$TEAM = [
+$TEAM = load_content('team', [
     ['name' => 'Gift Ayebare', 'role' => 'Director – Communications',
      'photo' => 'assets/img/team/gift-ayebare.jpg',
      'bio' => '10+ years in corporate communications, PR and media relations.'],
     ['name' => 'Katushabe Fiona', 'role' => 'Director – Operations',
      'photo' => 'assets/img/team/katushabe-fiona.jpg',
      'bio' => '10+ years in HR and administration across education, healthcare and hospitality.'],
-];
+]);
 
-$CLIENTS = [
+$CLIENTS = load_content('clients', [
     ['name' => 'Equatorial',       'logo' => 'assets/img/clients/equatorial.png'],
     ['name' => 'Eurofoam',         'logo' => 'assets/img/clients/eurofoam.png'],
     ['name' => 'Kaps',             'logo' => 'assets/img/clients/kaps.png'],
@@ -125,18 +144,18 @@ $CLIENTS = [
     ['name' => 'Reclaim Health',   'logo' => 'assets/img/clients/reclaim-health.png'],
     ['name' => 'SBA',              'logo' => 'assets/img/clients/sba.jpg'],
     ['name' => 'Vodka',            'logo' => 'assets/img/clients/vodka.png'],
-];
+]);
 
-$WORK = [
+$WORK = load_content('work', [
     ['title' => 'Nile Agro',        'kind' => 'Brand refresh · Packaging', 'tint' => 'a', 'img' => 'assets/img/work/nile-agro.jpg'],
     ['title' => 'Reclaim Health',   'kind' => 'Campaign · Content',        'tint' => 'b', 'img' => 'assets/img/work/reclaim-health.jpg'],
     ['title' => 'Lynn Driving',     'kind' => 'Identity · Digital',        'tint' => 'c', 'img' => 'assets/img/work/lynn-driving.jpg'],
     ['title' => 'Eurofoam',         'kind' => 'Media buying · Activation', 'tint' => 'd', 'img' => 'assets/img/work/eurofoam.jpg'],
     ['title' => 'Equatorial',       'kind' => 'PR · Video production',     'tint' => 'e', 'img' => 'assets/img/work/equatorial.jpg'],
     ['title' => 'Prestige Driving', 'kind' => 'Social · Performance',      'tint' => 'f', 'img' => 'assets/img/work/prestige-driving.jpg'],
-];
+]);
 
-$TESTIMONIALS = [
+$TESTIMONIALS = load_content('testimonials', [
     ['quote' => 'A game-changer for our brand. Every design came back strategically aligned to what we were trying to say.',
      'name' => 'Grace', 'meta' => 'Marketing Lead'],
     ['quote' => 'The brand refresh landed exactly where we hoped. Communication was clear the whole way through.',
@@ -145,7 +164,4 @@ $TESTIMONIALS = [
      'name' => 'George', 'meta' => 'Operations Director'],
     ['quote' => 'They combined strategy and design in a way that moved our numbers – engagement is measurably up.',
      'name' => 'Emma', 'meta' => 'Brand Manager'],
-];
-
-/* Helper */
-function e(?string $s): string { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
+]);

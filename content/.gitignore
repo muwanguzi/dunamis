@@ -1,0 +1,4 @@
+# The admin password hash shouldn't be visible in a public repo history,
+# even though bcrypt makes it very hard to reverse. It still needs to exist
+# on the server — it's just uploaded there directly, not via git.
+admin-user.json

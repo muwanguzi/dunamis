@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Brand Strategy Workshop",
+        "day": "10",
+        "month": "Oct",
+        "year": "2026",
+        "location": "Dunamis Media, Kira Road, Kampala",
+        "tag": "Workshop",
+        "img": "assets/img/events/brand-strategy-workshop.jpg",
+        "desc": "A hands-on half-day session on building a brand strategy that actually drives sales — for founders and marketing leads.",
+        "link": "#contact",
+        "link_label": "Reserve a seat"
+    },
+    {
+        "title": "Kampala Creatives & Brands Mixer",
+        "day": "14",
+        "month": "Nov",
+        "year": "2026",
+        "location": "Kampala, Uganda",
+        "tag": "Meetup",
+        "img": "assets/img/events/creatives-mixer.jpg",
+        "desc": "An evening of informal networking for marketers, creatives and brand owners across the city.",
+        "link": "#contact",
+        "link_label": "RSVP"
+    },
+    {
+        "title": "Year-End Campaign Planning Clinic",
+        "day": "05",
+        "month": "Dec",
+        "year": "2026",
+        "location": "Dunamis Media, Kira Road, Kampala",
+        "tag": "Clinic",
+        "img": "assets/img/events/planning-clinic.jpg",
+        "desc": "Free 30-minute slots with our strategy team to map out your Q1 marketing calendar.",
+        "link": "#contact",
+        "link_label": "Book a slot"
+    }
+]

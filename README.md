@@ -17,23 +17,38 @@ Then open <http://localhost:8000>.
 ```
 index.php            Page composition (includes head + header + sections + footer)
 contact.php          Form handler — validates, emails, logs to storage/messages.log
+content/             Editable site copy, one JSON file per collection (see below)
 includes/
-  data.php           ALL site copy (services, team, values, testimonials, contact…)
+  data.php           Loads content/*.json into $SITE, $SERVICES, $WORK, etc.,
+                     falling back to a built-in snapshot if a file is ever missing
   head.php           <head>, fonts, meta
   header.php          Sticky nav
   footer.php          Footer + script tag
 sections/            One file per page section (hero, logos, services, work, studio,
-                     testimonials, contact)
+                     testimonials, events, contact)
+admin/               Admin panel for editing content/* and uploading images — see below
 assets/
-  css/style.css      Design system + layout (ink / paper / lime palette)
+  css/style.css      Design system + layout
   js/main.js         Sticky header, mobile nav, scroll reveal, counters, AJAX form
 storage/messages.log Contact submissions (created on first message)
 ```
 
 ## Editing content
 
-Everything readable lives in `includes/data.php` — change the arrays, reload the page.
-No templates need to be touched for copy updates.
+Go to `/admin` and log in — every section on the site (services, work, team, stats,
+values, client logos, testimonials, events, the hero videos, and the site's contact
+details) has its own add/edit/delete/reorder screen, with image upload built in.
+Saved changes write straight to `content/*.json` and are live immediately, no
+deploy step needed.
+
+You can also hand-edit the JSON files in `content/` directly if you prefer — the
+admin panel and the JSON files are the same data, just two ways to reach it.
+`includes/data.php` only carries a hardcoded snapshot as a last-resort fallback if a
+JSON file is ever missing or corrupted; it's not meant to be edited for routine copy
+changes any more.
+
+See `admin/README.md` for how the admin panel itself is put together (auth, image
+upload, security notes).
 
 ## Contact form
 

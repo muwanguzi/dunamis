@@ -1,0 +1,22 @@
+[
+    {
+        "no": "01",
+        "title": "Discover",
+        "desc": "Brief, brand audit and audience research — we find the real problem before we touch a design tool."
+    },
+    {
+        "no": "02",
+        "title": "Strategize",
+        "desc": "One plan ties creative, media and budget to a single measurable goal, agreed with you up front."
+    },
+    {
+        "no": "03",
+        "title": "Create",
+        "desc": "Design, film, copy and print produced in-house — on brand, reviewed with you at every stage."
+    },
+    {
+        "no": "04",
+        "title": "Launch & Learn",
+        "desc": "We place it, activate it, then report on what moved — and feed that back into the next round."
+    }
+]

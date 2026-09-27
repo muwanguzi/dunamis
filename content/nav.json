@@ -1,0 +1,22 @@
+[
+    {
+        "label": "Work",
+        "href": "#work"
+    },
+    {
+        "label": "Services",
+        "href": "#services"
+    },
+    {
+        "label": "Studio",
+        "href": "#studio"
+    },
+    {
+        "label": "Events",
+        "href": "#events"
+    },
+    {
+        "label": "Contact",
+        "href": "#contact"
+    }
+]

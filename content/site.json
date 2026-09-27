@@ -1,0 +1,30 @@
+{
+    "name": "Dunamis Media",
+    "legal": "Dunamis Media Company Limited",
+    "tagline": "Creative thinking, crafted beautifully.",
+    "email": "dunamismediacompanylimited@gmail.com",
+    "phones": [
+        "+256 701 509 103",
+        "+256 702 573 822"
+    ],
+    "address": "Martyrs Mall, Plot 1667, Kyaliwajjala – Namugongo, Kira Road",
+    "logo": "assets/img/brand/dunamis-logo.png",
+    "wordmark": "assets/img/brand/dunamis-wordmark.png",
+    "hero_videos": [
+        "assets/video/hero-1.mp4",
+        "assets/video/hero-2.mp4",
+        "assets/video/hero-3.mp4"
+    ],
+    "socials": [
+        {
+            "label": "Instagram",
+            "handle": "@dunamismediaofficial",
+            "url": "https://instagram.com/dunamismediaofficial"
+        },
+        {
+            "label": "Twitter / X",
+            "handle": "@dunamismediaco",
+            "url": "https://x.com/dunamismediaco"
+        }
+    ]
+}
