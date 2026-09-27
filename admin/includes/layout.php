@@ -17,41 +17,64 @@ function admin_head(string $title): void {
 <?php
 }
 
+/**
+ * Sidebar nav, grouped by kind, plus the main-content wrapper it opens.
+ * admin_foot() closes what this opens — keep the two in sync.
+ */
 function admin_nav(string $active = ''): void {
-    $links = [
-        ''              => 'Dashboard',
-        'site'          => 'Site & hero',
-        'services'      => 'Services',
-        'process'       => 'Process',
-        'work'          => 'Work',
-        'team'          => 'Team',
-        'stats'         => 'Stats',
-        'values'        => 'Values',
-        'clients'       => 'Client logos',
-        'testimonials'  => 'Testimonials',
-        'events'        => 'Events',
-        'messages'      => 'Messages',
+    $collectionHref = fn(string $key) => "edit.php?type=$key";
+    $groups = [
+        'Overview' => [
+            '' => ['Dashboard', 'index.php'],
+        ],
+        'Content' => [
+            'services'     => ['Services', $collectionHref('services')],
+            'process'      => ['Process', $collectionHref('process')],
+            'work'         => ['Work', $collectionHref('work')],
+            'team'         => ['Team', $collectionHref('team')],
+            'stats'        => ['Stats', $collectionHref('stats')],
+            'values'       => ['Values', $collectionHref('values')],
+            'clients'      => ['Client logos', $collectionHref('clients')],
+            'testimonials' => ['Testimonials', $collectionHref('testimonials')],
+            'events'       => ['Events', $collectionHref('events')],
+        ],
+        'Site' => [
+            'site' => ['Site & hero', 'site.php'],
+        ],
+        'Inbox' => [
+            'messages' => ['Messages', 'messages.php'],
+        ],
     ];
     ?>
-    <header class="admin-topbar">
-      <div class="admin-topbar-inner">
-        <a href="index.php" class="admin-brand">Dunamis Admin</a>
-        <nav class="admin-nav" aria-label="Admin sections">
-          <?php foreach ($links as $key => $label):
-            $href = $key === '' ? 'index.php' : (in_array($key, ['services','process','work','team','stats','values','clients','testimonials','events'], true) ? "edit.php?type=$key" : "$key.php");
-            $isActive = $key === $active;
-          ?>
-            <a href="<?= e($href) ?>" class="<?= $isActive ? 'is-active' : '' ?>"><?= e($label) ?></a>
+    <div class="admin-mobile-bar">
+      <button type="button" class="admin-burger" id="adminBurger" aria-label="Menu" aria-expanded="false" aria-controls="adminSidebar">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.php" class="admin-brand">Dunamis Admin</a>
+    </div>
+    <div class="admin-shell">
+      <div class="admin-sidebar-veil" id="adminVeil"></div>
+      <aside class="admin-sidebar" id="adminSidebar">
+        <a href="index.php" class="admin-sidebar-brand">Dunamis Admin</a>
+        <nav aria-label="Admin sections">
+          <?php foreach ($groups as $groupLabel => $items): ?>
+            <div class="admin-nav-group">
+              <h4><?= e($groupLabel) ?></h4>
+              <?php foreach ($items as $key => [$label, $href]): ?>
+                <a href="<?= e($href) ?>" class="<?= $key === $active ? 'is-active' : '' ?>"><?= e($label) ?></a>
+              <?php endforeach; ?>
+            </div>
           <?php endforeach; ?>
         </nav>
-        <div class="admin-topbar-right">
+        <div class="admin-sidebar-foot">
           <a href="../index.php" target="_blank" rel="noopener">View site ↗</a>
           <a href="change-password.php">Account</a>
           <a href="logout.php">Log out</a>
         </div>
-      </div>
-    </header>
+      </aside>
+      <main class="admin-main">
     <?php
+    $GLOBALS['__admin_shell_open'] = true;
 }
 
 function admin_flash(): void {
@@ -61,5 +84,25 @@ function admin_flash(): void {
 }
 
 function admin_foot(): void {
+    if (!empty($GLOBALS['__admin_shell_open'])) {
+        echo '</main></div>';
+        ?>
+        <script>
+        (function () {
+          var burger = document.getElementById('adminBurger');
+          var sidebar = document.getElementById('adminSidebar');
+          var veil = document.getElementById('adminVeil');
+          if (!burger || !sidebar || !veil) return;
+          var setOpen = function (open) {
+            sidebar.classList.toggle('is-open', open);
+            veil.classList.toggle('is-open', open);
+            burger.setAttribute('aria-expanded', String(open));
+          };
+          burger.addEventListener('click', function () { setOpen(!sidebar.classList.contains('is-open')); });
+          veil.addEventListener('click', function () { setOpen(false); });
+        })();
+        </script>
+        <?php
+    }
     echo "</body>\n</html>\n";
 }
