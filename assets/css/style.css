@@ -567,7 +567,12 @@ button { font: inherit; cursor: pointer; }
 .contact-socials { display: flex; gap: 1.1rem; }
 
 /* ---------- footer ---------- */
-.site-footer { background: var(--ink); color: #fff; padding-block: clamp(3rem, 6vw, 4.5rem) 1.5rem; border-top: 3px solid var(--accent); }
+.site-footer { position: relative; background: var(--ink); color: #fff; padding-block: clamp(3rem, 6vw, 4.5rem) 1.5rem; }
+.site-footer::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(94%, 1180px); height: 3px; border-radius: 100px;
+  background: linear-gradient(90deg, transparent, var(--accent) 12%, var(--accent) 88%, transparent);
+}
 .footer-grid {
   display: grid; grid-template-columns: 1.3fr .7fr .7fr 1.7fr; gap: clamp(2rem, 4vw, 3.25rem);
   padding-bottom: clamp(2.25rem, 5vw, 3.5rem);
