@@ -12,35 +12,46 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $postAction = (string) ($_POST['action'] ?? '');
 
     if ($postAction === 'save_site') {
+        $site['name']    = trim((string) ($_POST['name'] ?? ''));
+        $site['legal']   = trim((string) ($_POST['legal'] ?? ''));
+        $site['tagline'] = trim((string) ($_POST['tagline'] ?? ''));
+        $site['email']   = trim((string) ($_POST['email'] ?? ''));
+        $site['address'] = trim((string) ($_POST['address'] ?? ''));
+
+        $phones = array_filter(array_map('trim', explode("\n", (string) ($_POST['phones'] ?? ''))));
+        $site['phones'] = array_values($phones);
+
+        $socials = [];
+        for ($i = 0; $i < $SOCIAL_ROWS; $i++) {
+            $label = trim((string) ($_POST["social_label_$i"] ?? ''));
+            $handle = trim((string) ($_POST["social_handle_$i"] ?? ''));
+            $url = trim((string) ($_POST["social_url_$i"] ?? ''));
+            if ($label === '' && $url === '') continue;
+            $socials[] = ['label' => $label, 'handle' => $handle, 'url' => $url];
+        }
+        $site['socials'] = $socials;
+
+        // Images are handled on their own so a rejected logo/wordmark doesn't
+        // cost the text fields above, which have already been applied.
+        $imageErrors = [];
         try {
-            $site['name']    = trim((string) ($_POST['name'] ?? ''));
-            $site['legal']   = trim((string) ($_POST['legal'] ?? ''));
-            $site['tagline'] = trim((string) ($_POST['tagline'] ?? ''));
-            $site['email']   = trim((string) ($_POST['email'] ?? ''));
-            $site['address'] = trim((string) ($_POST['address'] ?? ''));
-
-            $phones = array_filter(array_map('trim', explode("\n", (string) ($_POST['phones'] ?? ''))));
-            $site['phones'] = array_values($phones);
-
-            $socials = [];
-            for ($i = 0; $i < $SOCIAL_ROWS; $i++) {
-                $label = trim((string) ($_POST["social_label_$i"] ?? ''));
-                $handle = trim((string) ($_POST["social_handle_$i"] ?? ''));
-                $url = trim((string) ($_POST["social_url_$i"] ?? ''));
-                if ($label === '' && $url === '') continue;
-                $socials[] = ['label' => $label, 'handle' => $handle, 'url' => $url];
-            }
-            $site['socials'] = $socials;
-
             $logo = handle_image_upload('logo', 'assets/img/brand');
             if ($logo) { $site['logo'] = $logo; }
+        } catch (RuntimeException $ex) {
+            $imageErrors[] = 'logo: ' . $ex->getMessage();
+        }
+        try {
             $wordmark = handle_image_upload('wordmark', 'assets/img/brand');
             if ($wordmark) { $site['wordmark'] = $wordmark; }
-
-            content_save('site', $site);
-            flash('ok', 'Site details saved.');
         } catch (RuntimeException $ex) {
-            flash('error', $ex->getMessage());
+            $imageErrors[] = 'wordmark: ' . $ex->getMessage();
+        }
+
+        content_save('site', $site);
+        if ($imageErrors) {
+            flash('error', 'Saved — but ' . implode('; ', $imageErrors));
+        } else {
+            flash('ok', 'Site details saved.');
         }
         header('Location: site.php');
         exit;

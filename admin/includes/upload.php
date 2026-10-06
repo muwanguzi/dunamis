@@ -9,8 +9,9 @@
 
 declare(strict_types=1);
 
-const UPLOAD_MAX_BYTES = 8 * 1024 * 1024; // 8MB in, may be smaller once re-encoded
-const UPLOAD_MAX_DIMENSION = 2000;        // longest side, px — plenty for this site
+const UPLOAD_MAX_BYTES = 25 * 1024 * 1024; // 25MB in — real camera/phone JPEGs run 10-20MB; re-encoded output is far smaller
+const UPLOAD_MAX_DIMENSION = 2000;         // longest side, px — plenty for this site
+const UPLOAD_MAX_SOURCE_PIXELS = 60_000_000; // guards GD's memory use against a tiny file claiming huge pixel dimensions
 
 /**
  * Handle one uploaded image field. Returns the new web-relative path
@@ -26,7 +27,9 @@ function handle_image_upload(string $field, string $webDir): ?string {
         throw new RuntimeException('Upload failed (error code ' . $file['error'] . ').');
     }
     if ($file['size'] > UPLOAD_MAX_BYTES) {
-        throw new RuntimeException('That image is too large — please keep it under 8MB.');
+        $gotMb = round($file['size'] / 1024 / 1024, 1);
+        $maxMb = (int) (UPLOAD_MAX_BYTES / 1024 / 1024);
+        throw new RuntimeException("That image is {$gotMb}MB — please keep it under {$maxMb}MB.");
     }
 
     $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -41,6 +44,9 @@ function handle_image_upload(string $field, string $webDir): ?string {
         throw new RuntimeException('That file isn\'t a valid image.');
     }
     [$width, $height] = $info;
+    if ($width * $height > UPLOAD_MAX_SOURCE_PIXELS) {
+        throw new RuntimeException('That image\'s dimensions are too large — please use a smaller photo.');
+    }
 
     $src = match ($mime) {
         'image/jpeg' => @imagecreatefromjpeg($file['tmp_name']),

@@ -35,9 +35,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     if ($postAction === 'save') {
         $i = isset($_POST['i']) && $_POST['i'] !== '' ? (int) $_POST['i'] : null;
         $row = $i !== null && isset($items[$i]) ? $items[$i] : [];
-        try {
-            foreach ($schema['fields'] as $name => $def) {
-                if ($def['type'] === 'image') {
+        // A rejected photo (too big, wrong type…) shouldn't cost the rest of
+        // the edit — apply every other field regardless, and only report the
+        // image problem on its own.
+        $imageError = null;
+        foreach ($schema['fields'] as $name => $def) {
+            if ($def['type'] === 'image') {
+                try {
                     $uploaded = handle_image_upload($name, $def['dir']);
                     if ($uploaded !== null) {
                         delete_upload($row[$name] ?? null);
@@ -46,22 +50,27 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                         delete_upload($row[$name] ?? null);
                         $row[$name] = null;
                     }
-                    continue;
+                } catch (RuntimeException $ex) {
+                    $imageError = $ex->getMessage();
                 }
-                $val = trim((string) ($_POST[$name] ?? ''));
-                if ($def['type'] === 'number') {
-                    $row[$name] = $val === '' ? null : (int) $val;
-                } else {
-                    $row[$name] = $val;
-                }
+                continue;
             }
-            if (!empty($schema['auto_number'])) $row['no'] = '00'; // placeholder, fixed by renumber()
-            if ($i !== null) { $items[$i] = $row; } else { $items[] = $row; }
-            $items = renumber($items, $schema);
-            content_save($type, $items);
+            $val = trim((string) ($_POST[$name] ?? ''));
+            if ($def['type'] === 'number') {
+                $row[$name] = $val === '' ? null : (int) $val;
+            } else {
+                $row[$name] = $val;
+            }
+        }
+        if (!empty($schema['auto_number'])) $row['no'] = '00'; // placeholder, fixed by renumber()
+        if ($i !== null) { $items[$i] = $row; } else { $items[] = $row; }
+        $items = renumber($items, $schema);
+        content_save($type, $items);
+
+        if ($imageError) {
+            flash('error', ($i !== null ? 'Saved — ' : 'Added — ') . 'but the photo wasn\'t updated: ' . $imageError);
+        } else {
             flash('ok', $i !== null ? 'Saved.' : 'Added.');
-        } catch (RuntimeException $ex) {
-            flash('error', $ex->getMessage());
         }
         header('Location: edit.php?type=' . urlencode($type));
         exit;
